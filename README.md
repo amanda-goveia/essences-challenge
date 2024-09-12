@@ -42,6 +42,7 @@ Como se trata de uma aplicação desenvolvida para um teste, algumas simplifica�
 * *Configuração de Credenciais:* As configurações, incluindo credenciais, foram armazenadas no arquivo `application.properties`. Em um ambiente de produção, essas informações deveriam ser gerenciadas de forma mais segura, utilizando um provider adequado para injeção na imagem.
 * *Cache em Memória:* Foi utilizada uma cache em memória para simplificação. Para aplicações distribuídas, seria mais eficiente implementar uma cache descentralizada, como o Redis, para garantir um desempenho adequado e escalabilidade.
 * *Testes:* Devido ao tempo limitado para o desenvolvimento, foram implementados testes apenas para o `EssenceController`. Em um cenário real, seria necessário expandir a cobertura dos testes para incluir outros componentes da aplicação.
+* *Logs:* Adição de logs são úteis para debuggar a aplicação.
 
 ## Principais features
 
