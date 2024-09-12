@@ -1,0 +1,98 @@
+openapi: 3.0.3
+info:
+  title: Essence API
+  description: API for managing and retrieving essences, as well as user authentication.
+  version: 1.0.0
+paths:
+  /api/v1/essences:
+    get:
+      summary: Retrieve all essences
+      description: Get a list of all essences.
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: A list of essences
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EssenceResponse'
+  /api/v1/essences/{id}:
+    get:
+      summary: Retrieve a specific essence by ID
+      description: Get details of a specific essence by its ID.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the essence to retrieve
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Details of the requested essence
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EssenceResponse'
+  /api/v1/login:
+    post:
+      summary: Authenticate a user
+      description: Authenticates a user and returns a JWT token.
+      requestBody:
+        description: User credentials
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+      responses:
+        '200':
+          description: Authentication successful and token returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+components:
+  schemas:
+    EssenceResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "12345"
+        name:
+          type: string
+          example: "Essence Name"
+        values:
+          type: array
+          items:
+            type: string
+          example: ["value1", "value2"]
+      required:
+        - id
+        - name
+    LoginRequest:
+      type: object
+      properties:
+        username:
+          type: string
+          example: "testuser"
+        password:
+          type: string
+          example: "testpassword"
+      required:
+        - username
+        - password
+    LoginResponse:
+      type: object
+      properties:
+        token:
+          type: string
+          example: "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0dXNlciIsImlhdCI6MTYyNjExMTQwMSwiZXhwIjoxNjI2MTExNjAxfQ.7sPjX2NXE--Nhd77e-fTTTB9XBY5YQxqYEPk6tdvA8U"
+      required:
+        - token
